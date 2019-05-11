@@ -3,14 +3,14 @@
   (:requirements :strips :equality :typing :fluents :durative-actions)
 	(:types satellite direction instrument mode)
  	(:predicates 
-         (on_board ?i - instrument ?s - satellite) //卫星中设备是否在（1/0）
-	       (supports ?i - instrument ?m - mode) //模式中设备是否支持（1/0）
-	       (pointing ?s - satellite ?d - direction) //方向中卫星指向（用文字）
+         (on_board ?i - instrument ?s - satellite) //设备是否在卫星中（1/0）
+	       (supports ?i - instrument ?m - mode) //设备是否支持在模式中（1/0）
+	       (pointing ?s - satellite ?d - direction) //方向中卫星指向（1/0）
 	       (power_avail ?s - satellite) //卫星电力是否充足（1/0）
 	       (power_on ?i - instrument) //设备是否开机（1/0）
 	       (calibrated ?i - instrument) //设备是否校正了（1/0）
 	       (have_image ?d - direction ?m - mode) //模式中是否在该方向拍照？
-	       (calibration_target ?i - instrument ?d - direction)) //这个方向上，这个设备的校正方向？
+	       (calibration_target ?i - instrument ?d - direction)) //设备是否校正到这个方向上？
  
  
 
