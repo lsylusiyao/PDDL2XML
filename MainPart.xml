@@ -1,0 +1,59 @@
+<!--这段是一个例子-->
+<ACTIVITIES>
+    <ACT_NAME>Cam_Takephoto</ACT_NAME>
+    <ACT_PARAM>
+        <PARAM_NAME>Direction </PARAM_NAME>
+        <PARAM_VALUE>0.14,0.25,0.55</PARAM_VALUE>
+    </ACT_PARAM>
+    <START> <INTERVAL STARTPOINT="0" ENDPOINT="0"/> </START>
+    <END> <INTERVAL STARTPOINT="0" ENDPOINT="0"> </END>
+    <DURATION><INTERVAL STARTPOINT="1" ENDPOINT="10"/> </DURATION>
+    <RES_NEED>
+        <RES_NAME>Power</RES_NAME>
+        <NEED_QUANTITY>10</NEED_QUANTITY>
+    </RES_NEED>
+    <TL_NAME>CAMERAACTIVE</TL_NAME>
+</ACTIVITIES>
+
+<!--下面才是有用的-->
+<ACTIVITIES>
+    <ACTIVITIY>
+        <NAME>take_image</NAME>
+        <PARAM>
+            <PARAM name="satellite"></PARAM>
+            <PARAM name="direction"></PARAM>
+            <PARAM name="instrument"></PARAM>
+            <PARAM name="mode"></PARAM>
+        </PARAM>
+        <START> <INTERVAL STARTPOINT="0" ENDPOINT="0"/> </START>
+        <END> <INTERVAL STARTPOINT="0" ENDPOINT="0"> </END>
+        <DURATION><INTERVAL STARTPOINT="1" ENDPOINT="7"/> </DURATION>
+        <CONDITION>
+            <calibrated type="over all">
+                <instrument>1</instrument>
+            </calibrated>
+            <on_board type="over all">
+                <instrument>1</instrument>
+                <satellite>1</satellite>
+            </on_board>
+            <supports type="over all">
+                <instrument>1</instrument>
+                <mode>1</mode>
+            </supports>
+            <pointing type="over all">
+                <satellite>1</satellite>
+                <direction>1</direction>
+            </pointing>
+
+            <power_on type="at end">
+                <instrument>1</instrument>
+            </power_on>        
+        </CONDITION>
+        <EFFECT>
+            <have_image type="at end">
+                <direction>1</direction>
+                <mode>1</mode>
+            </have_image>
+        </EFFECT>
+    </ACTIVITIY>
+</ACTIVITIES>
