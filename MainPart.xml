@@ -16,37 +16,57 @@
 </ACTIVITIES>
 
 <!--下面才是有用的-->
-<ACTIVITIES>
-    <ACTIVITIY>
+<DOMAIN name="satellite">
+    <REQUIREMENTS>strips, equality, typing, fluents, durative-actions</REQUIREMENTS>
+    <TYPES>satellite, direction, instrument, mode</TYPES>
+    <PREDICATES>
+        <on_board>
+            <instrument>i</instrument>
+            <satellite>s</satellite>
+        </on_board>
+        <!--下面懒的写了-->
+    </PREDICATES>
+    <ACTION type="durative">
         <NAME>take_image</NAME>
         <PARAM>
-            <PARAM name="satellite"></PARAM>
-            <PARAM name="direction"></PARAM>
-            <PARAM name="instrument"></PARAM>
-            <PARAM name="mode"></PARAM>
+            <PARAM name="satellite">
+                <variable>i</variable>
+            </PARAM>
+            <PARAM name="direction">
+                <variable>i</variable>
+            </PARAM>
+            <PARAM name="instrument">
+                <variable>i</variable>
+            </PARAM>
+            <PARAM name="mode">
+                <variable>i</variable>
+            </PARAM>
         </PARAM>
         <START> <INTERVAL STARTPOINT="0" ENDPOINT="0"/> </START>
         <END> <INTERVAL STARTPOINT="0" ENDPOINT="0"> </END>
         <DURATION><INTERVAL STARTPOINT="1" ENDPOINT="7"/> </DURATION>
         <CONDITION>
             <calibrated type="over all">
-                <instrument>1</instrument>
+                <instrument>i</instrument>
             </calibrated>
             <on_board type="over all">
-                <instrument>1</instrument>
-                <satellite>1</satellite>
+                <instrument>i</instrument>
+                <satellite>s</satellite>
             </on_board>
             <supports type="over all">
-                <instrument>1</instrument>
-                <mode>1</mode>
+                <instrument>i</instrument>
+                <mode>m</mode>
             </supports>
+            <power_on type="over all">
+                <instrument>i</instrument>
+            </power_on>
             <pointing type="over all">
-                <satellite>1</satellite>
-                <direction>1</direction>
+                <satellite>s</satellite>
+                <direction>d</direction>
             </pointing>
 
             <power_on type="at end">
-                <instrument>1</instrument>
+                <instrument>i</instrument>
             </power_on>        
         </CONDITION>
         <EFFECT>
@@ -55,5 +75,5 @@
                 <mode>1</mode>
             </have_image>
         </EFFECT>
-    </ACTIVITIY>
-</ACTIVITIES>
+    </ACTION>
+</DOMAIN>

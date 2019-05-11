@@ -154,9 +154,11 @@
   <ItemGroup>
     <ClCompile Include="..\tinyxml2-7.0.1\tinyxml2.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ReadFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\tinyxml2-7.0.1\tinyxml2.h" />
+    <ClInclude Include="ReadFile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

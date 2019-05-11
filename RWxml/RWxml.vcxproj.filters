@@ -21,9 +21,15 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ReadFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\tinyxml2-7.0.1\tinyxml2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadFile.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

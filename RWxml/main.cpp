@@ -71,9 +71,6 @@ int OutputXML(const char* path)
 
 int main()
 {
-	auto result = InputXML("../exampleIn.xml");
-	if (result != XML_SUCCESS) return result;
-	OutputXML("../exampleOut.xml");
 	return 0;
 	
 }
