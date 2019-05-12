@@ -29,24 +29,17 @@
     <ACTION type="durative">
         <NAME>take_image</NAME>
         <PARAM>
-            <PARAM name="satellite">
-                <variable>i</variable>
-            </PARAM>
-            <PARAM name="direction">
-                <variable>i</variable>
-            </PARAM>
-            <PARAM name="instrument">
-                <variable>i</variable>
-            </PARAM>
-            <PARAM name="mode">
-                <variable>i</variable>
-            </PARAM>
+            <satellite>s</satellite>
+            <!--又不想写了-->
         </PARAM>
-        <START> <INTERVAL STARTPOINT="0" ENDPOINT="0"/> </START>
-        <END> <INTERVAL STARTPOINT="0" ENDPOINT="0"> </END>
-        <DURATION><INTERVAL STARTPOINT="1" ENDPOINT="7"/> </DURATION>
+        <DURATION>7</DURATION>
+        <DURATION>
+            <function name="calibration_time">
+                <instrument>i</instrument>
+            </function>
+        </DURATION>
         <CONDITION>
-            <calibrated type="over all">
+            <calibrated mainType="and" keepingType="over all" itselfType="">
                 <instrument>i</instrument>
             </calibrated>
             <on_board type="over all">

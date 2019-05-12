@@ -44,6 +44,7 @@ int OutputXML(const char* path)
 	auto content1 = doc.NewElement("Content");
 	content1->InsertEndChild(doc.NewText(s.data()));
 	content1->SetAttribute("count", (float)s.size());
+	content1->SetAttribute("aaa", "bbb");
 	a1->InsertEndChild(content1);
 
 	auto page1 = doc.NewElement("Page");
@@ -71,6 +72,7 @@ int OutputXML(const char* path)
 
 int main()
 {
+	OutputXML("xxx.xml");
 	return 0;
 	
 }
