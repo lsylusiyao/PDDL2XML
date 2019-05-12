@@ -26,8 +26,8 @@ struct Action
 	bool isDurationNum;
 	string duration_Num;
 	Composite duration;
-	Composite condition;
-	Composite effect;
+	vector<Composite> condition;
+	vector<Composite> effect;
 };
 
 
@@ -40,18 +40,20 @@ public:
 	void RealAll(); //读取文件并放到allLine中
 	map<string,string> DealMostHeadPart(); //把开始段的大部分处理完
 	map<string, map<string, string>> DealPredicates(); //<变量名，变量类型>
-	void DealAllAction(); //处理所有action
+	vector<Action> DealAllAction(); //处理所有action
 
-	vector<Action> allAction; //所有action
-	map<string, string> allType; //所有类型，字典
+	
 private:
 	Action DealAction(int startLine, int endLine);
+	vector<string> RegSearch0(string s, string rs,int which = 0);
 
+	vector<Action> allAction; //所有action
 	string eachLine; //每一行的字符串
 	std::ifstream in; //输入流
 	vector<string> allLine; //每一行一个string
 	map<string, int> partNum; //除了action之外的每一部分行号的字典
 	vector<int> actionNum; //每个action的行号
+	map<string, string> allType; //所有类型，字典
 	
 
 };

@@ -1,9 +1,8 @@
 ﻿#include "tinyxml2.h"
-#include <iostream>
-#include <string>
-#include <fstream>
+#include "ReadFile.h"
 using namespace tinyxml2;
-using namespace std;
+using std::cout;
+using std::endl;
 
 int InputXML(const char* path)
 {
@@ -72,7 +71,12 @@ int OutputXML(const char* path)
 
 int main()
 {
-	OutputXML("xxx.xml");
+	ReadFileClass readFile("../Satellite.pddl");
+	readFile.RealAll();
+	map<string, string> head = readFile.DealMostHeadPart();
+	auto predicates = readFile.DealPredicates();
+	auto allAction = readFile.DealAllAction();
+	
 	return 0;
 	
 }
