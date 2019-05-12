@@ -38,9 +38,9 @@ public:
 	ReadFileClass(const char* path);
 	~ReadFileClass();
 	void RealAll(); //读取文件并放到allLine中
-	map<string,string> DealMostHeadPart(); //把开始段的大部分处理完
-	map<string, map<string, string>> DealPredicates(); //<变量名，变量类型>
-	vector<Action> DealAllAction(); //处理所有action
+	map<string,string> GetMostHeadPart(); //把开始段的大部分处理完
+	map<string, map<string, string>> GetPredicates(); //<变量名，变量类型>
+	vector<Action> GetAllAction(); //处理所有action
 
 	
 private:

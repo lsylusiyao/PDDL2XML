@@ -39,7 +39,7 @@ void ReadFileClass::RealAll()
 	}
 }
 
-map<string, string> ReadFileClass::DealMostHeadPart()
+map<string, string> ReadFileClass::GetMostHeadPart()
 {
 	map<string, string>resultReturn;
 	smatch result;
@@ -68,7 +68,7 @@ map<string, string> ReadFileClass::DealMostHeadPart()
 	return resultReturn;
 }
 
-map<string, map<string, string>> ReadFileClass::DealPredicates()
+map<string, map<string, string>> ReadFileClass::GetPredicates()
 {
 	map<string, map<string, string>> all;
 	smatch result;
@@ -224,7 +224,7 @@ vector<string> ReadFileClass::RegSearch0(string s, string rs,int which)
 	return back;
 }
 
-vector<Action> ReadFileClass::DealAllAction()
+vector<Action> ReadFileClass::GetAllAction()
 {
 	for (int i = 1; i < actionNum.size() - 1; i++)
 	{

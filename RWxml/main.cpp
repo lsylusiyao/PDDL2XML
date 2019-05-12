@@ -66,16 +66,16 @@ int OutputXML(const char* path)
 	page2->InsertEndChild(pageNum2);
 	a2->InsertEndChild(page2);
 
-	return doc.SaveFile(path);;
+	return doc.SaveFile(path);
 }
 
 int main()
 {
 	ReadFileClass readFile("../Satellite.pddl");
 	readFile.RealAll();
-	map<string, string> head = readFile.DealMostHeadPart();
-	auto predicates = readFile.DealPredicates();
-	auto allAction = readFile.DealAllAction();
+	map<string, string> head = readFile.GetMostHeadPart();
+	auto predicates = readFile.GetPredicates();
+	auto allAction = readFile.GetAllAction();
 	
 	return 0;
 	
