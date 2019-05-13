@@ -1,5 +1,5 @@
 <DOMAIN name="satellite">
-    <REQUIREMENTS>strips, equality, typing, fluents, </REQUIREMENTS>
+    <REQUIREMENTS>strips, equality, typing, fluents, durative-actions</REQUIREMENTS>
     <TYPES>satellite, direction, instrument, mode</TYPES>
     <PREDICATES>
         <calibrated>
@@ -39,7 +39,10 @@
             <direction>d_prev</direction>
             <satellite>s</satellite>
         </PARAM>
-        <DURATION/>
+        <function name="slew_time">
+            <direction>d_new</direction>
+            <direction>d_prev</direction>
+        </function>
         <CONDITION>
             <pointing mainType="and" keepingType="at start" itselfType="">
                 <direction>d_prev</direction>
@@ -117,7 +120,10 @@
             <instrument>i</instrument>
             <satellite>s</satellite>
         </PARAM>
-        <DURATION/>
+        <function name="calibration_time">
+            <direction>d</direction>
+            <instrument>i</instrument>
+        </function>
         <CONDITION>
             <on_board mainType="and" keepingType="over all" itselfType="">
                 <instrument>i</instrument>

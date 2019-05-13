@@ -14,7 +14,7 @@ int main()
 	writeFile.WriteHead(head);
 	writeFile.WritePredicates(predicates);
 	writeFile.WriteAllAction(allAction);
-	writeFile.FinalStep();
+	writeFile.FinalStep(true);
 	
 	return 0;
 	

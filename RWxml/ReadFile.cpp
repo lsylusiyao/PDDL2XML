@@ -53,13 +53,12 @@ map<string, string> ReadFileClass::GetMostHeadPart()
 	auto result2 = RegSearch0(allLine[partNum["requirements"]], ":([a-z,-]*)");
 	//regex_search(allLine[partNum["requirements"]], result, regex(":([a-z,-]*)")); //注意这里匹配的不完全对
 	
-	for (int i = 1; i < result2.size() - 1; i++)
+	for (int i = 1; i < result2.size(); i++)
 	{
 		tempS = result2[i];
 		tempS.erase(tempS.begin());
-		finalS += tempS + ", ";
+		finalS += tempS + (i == result2.size() - 1 ? "" : ", ");
 	}
-	finalS += result[result2.size() - 1];
 	resultReturn["requirements"] = finalS;
 
 	regex_search(allLine[partNum["types"]], result, regex(":types (.*)\\)"));
@@ -76,11 +75,11 @@ map<string, map<string, string>> ReadFileClass::GetPredicates()
 	string type;
 	string variableType;
 	string variable;
-	for (int i = ++partNum["predicates"]; i < partNum["functions"]; i++)
+	for (int i = partNum["predicates"]; i < partNum["functions"]; i++)
 	{
 		map<string, string> variableMap;
 		tempS = allLine[i];
-		regex_search(tempS, result, regex("\\(([a-z,_]*)"));
+		regex_search(tempS, result, regex("\\(([a-z,_]+)"));
 		type = result[1];
 		//regex_search(tempS, result, regex("\\?([a-z,_]* - [a-z]*)"));
 		auto result0 = RegSearch0(tempS, "\\?([a-z,_]* - [a-z]*)");

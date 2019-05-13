@@ -27,6 +27,7 @@ void WriteXMLClass::WritePredicates(map<string, map<string, string>> p)
 	auto predicateElement = doc.NewElement("PREDICATES");
 	for (auto m1 : p)
 	{
+		if (m1.first.size() == 0) continue;
 		auto typeElement = doc.NewElement(m1.first.data()); //<on_board>
 		WriteVariables(m1.second, typeElement);
 		predicateElement->InsertEndChild(typeElement);
@@ -63,18 +64,21 @@ XMLElement* WriteXMLClass::WriteAction(Action a)
 	if (a.isDurationNum) //如果只是一个数
 	{
 		durationElement->InsertEndChild(doc.NewText(a.duration_Num.data()));
+		actiomElement->InsertEndChild(durationElement);
 	}
 	else //如果用函数表示
 	{
 		auto functionElement = doc.NewElement("function");
 		functionElement->SetAttribute("name", a.duration.someName.data());
 		WriteVariables(a.duration.param, functionElement);
+		actiomElement->InsertEndChild(functionElement);
 	}
-	actiomElement->InsertEndChild(durationElement);
+	
 
 	auto conditionElement = doc.NewElement("CONDITION"); //设置condition
 	for (auto m1 : a.condition)
 	{
+		if (m1.someName.size() == 0) continue;
 		auto eachElement = doc.NewElement(m1.someName.data());
 		eachElement->SetAttribute("mainType", m1.mainType.data());
 		eachElement->SetAttribute("keepingType", m1.keepingType.data());
@@ -87,6 +91,7 @@ XMLElement* WriteXMLClass::WriteAction(Action a)
 	auto effectElement = doc.NewElement("EFFECT"); //设置condition
 	for (auto m1 : a.effect)
 	{
+		if (m1.someName.size() == 0) continue;
 		auto eachElement = doc.NewElement(m1.someName.data());
 		eachElement->SetAttribute("mainType", m1.mainType.data());
 		eachElement->SetAttribute("keepingType", m1.keepingType.data());
@@ -105,6 +110,7 @@ void WriteXMLClass::WriteVariables(map<string, string> mapss, tinyxml2::XMLEleme
 	XMLElement* variable;
 	for (auto m : mapss)
 	{
+		if (m.first.size() == 0) continue;
 		variable = doc.NewElement(m.second.data()); //<instrument>
 		variable->InsertEndChild(doc.NewText(m.first.data())); //i
 		toInsert->InsertEndChild(variable);
