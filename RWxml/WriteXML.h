@@ -6,15 +6,17 @@ class WriteXMLClass
 {
 public:
 	WriteXMLClass(const char* p);
-	void WriteHead(map<string, string> h);
-	void WritePredicates(map<string, map<string, string>> p);
-	void WriteAllAction(vector<Action> va);
+	void WriteHead(map<string, string> h); //输出前部分
+	void WritePredicates(map<string, map<string, string>> p); //输出predicates
+	void WriteAllAction(vector<Action> va); //输出所有action
+	void FinalStep(bool write2File = true);
 
 private:
 	const char* path;
 	tinyxml2::XMLDocument doc;
 	tinyxml2::XMLElement* root;
 
-	void WriteAction(Action a);
+	tinyxml2::XMLElement* WriteAction(Action a); //输出一个action
+	void WriteVariables(map<string, string> mapss, tinyxml2::XMLElement* toInsert);
 
 };

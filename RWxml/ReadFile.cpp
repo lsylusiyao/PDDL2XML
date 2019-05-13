@@ -230,6 +230,6 @@ vector<Action> ReadFileClass::GetAllAction()
 	{
 		allAction.push_back(DealAction(actionNum[i], actionNum[i + 1] - 1));
 	}
-	allAction.push_back(DealAction(actionNum.back(), allLine.size()-1));
+	allAction.push_back(DealAction(actionNum.back(), (int)allLine.size() - 2));
 	return allAction;
 }

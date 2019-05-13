@@ -1,0 +1,182 @@
+<DOMAIN name="satellite">
+    <REQUIREMENTS>strips, equality, typing, fluents, </REQUIREMENTS>
+    <TYPES>satellite, direction, instrument, mode</TYPES>
+    <PREDICATES>
+        <calibrated>
+            <instrument>i</instrument>
+        </calibrated>
+        <calibration_target>
+            <direction>d</direction>
+            <instrument>i</instrument>
+        </calibration_target>
+        <have_image>
+            <direction>d</direction>
+            <mode>m</mode>
+        </have_image>
+        <on_board>
+            <instrument>i</instrument>
+            <satellite>s</satellite>
+        </on_board>
+        <pointing>
+            <direction>d</direction>
+            <satellite>s</satellite>
+        </pointing>
+        <power_avail>
+            <satellite>s</satellite>
+        </power_avail>
+        <power_on>
+            <instrument>i</instrument>
+        </power_on>
+        <supports>
+            <instrument>i</instrument>
+            <mode>m</mode>
+        </supports>
+    </PREDICATES>
+    <ACTION type="durative">
+        <NAME>turn_to</NAME>
+        <PARAM>
+            <direction>d_new</direction>
+            <direction>d_prev</direction>
+            <satellite>s</satellite>
+        </PARAM>
+        <DURATION/>
+        <CONDITION>
+            <pointing mainType="and" keepingType="at start" itselfType="">
+                <direction>d_prev</direction>
+                <satellite>s</satellite>
+            </pointing>
+        </CONDITION>
+        <EFFECT>
+            <pointing mainType="and" keepingType="at end" itselfType="">
+                <direction>d_new</direction>
+                <satellite>s</satellite>
+            </pointing>
+            <pointing mainType="and" keepingType="at start" itselfType="not">
+                <direction>d_prev</direction>
+                <satellite>s</satellite>
+            </pointing>
+        </EFFECT>
+    </ACTION>
+    <ACTION type="durative">
+        <NAME>switch_on</NAME>
+        <PARAM>
+            <instrument>i</instrument>
+            <satellite>s</satellite>
+        </PARAM>
+        <DURATION>2</DURATION>
+        <CONDITION>
+            <on_board mainType="and" keepingType="over all" itselfType="">
+                <instrument>i</instrument>
+                <satellite>s</satellite>
+            </on_board>
+            <power_avail mainType="and" keepingType="at start" itselfType="">
+                <satellite>s</satellite>
+            </power_avail>
+        </CONDITION>
+        <EFFECT>
+            <power_on mainType="and" keepingType="at end" itselfType="">
+                <instrument>i</instrument>
+            </power_on>
+            <calibrated mainType="and" keepingType="at start" itselfType="not">
+                <instrument>i</instrument>
+            </calibrated>
+            <power_avail mainType="and" keepingType="at start" itselfType="not">
+                <satellite>s</satellite>
+            </power_avail>
+        </EFFECT>
+    </ACTION>
+    <ACTION type="durative">
+        <NAME>switch_off</NAME>
+        <PARAM>
+            <instrument>i</instrument>
+            <satellite>s</satellite>
+        </PARAM>
+        <DURATION>1</DURATION>
+        <CONDITION>
+            <on_board mainType="and" keepingType="over all" itselfType="">
+                <instrument>i</instrument>
+                <satellite>s</satellite>
+            </on_board>
+            <power_on mainType="and" keepingType="at start" itselfType="">
+                <instrument>i</instrument>
+            </power_on>
+        </CONDITION>
+        <EFFECT>
+            <power_on mainType="and" keepingType="at start" itselfType="not">
+                <instrument>i</instrument>
+            </power_on>
+            <power_avail mainType="and" keepingType="at end" itselfType="">
+                <satellite>s</satellite>
+            </power_avail>
+        </EFFECT>
+    </ACTION>
+    <ACTION type="durative">
+        <NAME>calibrate</NAME>
+        <PARAM>
+            <direction>d</direction>
+            <instrument>i</instrument>
+            <satellite>s</satellite>
+        </PARAM>
+        <DURATION/>
+        <CONDITION>
+            <on_board mainType="and" keepingType="over all" itselfType="">
+                <instrument>i</instrument>
+                <satellite>s</satellite>
+            </on_board>
+            <calibration_target mainType="and" keepingType="over all" itselfType="">
+                <direction>d</direction>
+                <instrument>i</instrument>
+            </calibration_target>
+            <pointing mainType="and" keepingType="at start" itselfType="">
+                <direction>d</direction>
+                <satellite>s</satellite>
+            </pointing>
+            <power_on mainType="and" keepingType="over all" itselfType="">
+                <instrument>i</instrument>
+            </power_on>
+            <power_on mainType="and" keepingType="at end" itselfType="">
+                <instrument>i</instrument>
+            </power_on>
+        </CONDITION>
+        <EFFECT>
+            <calibrated mainType="and" keepingType="at end" itselfType="">
+                <instrument>i</instrument>
+            </calibrated>
+        </EFFECT>
+    </ACTION>
+    <ACTION type="durative">
+        <NAME>take_image</NAME>
+        <PARAM>
+            <direction>d</direction>
+            <instrument>i</instrument>
+            <mode>m</mode>
+            <satellite>s</satellite>
+        </PARAM>
+        <DURATION>7</DURATION>
+        <CONDITION>
+            <calibrated mainType="and" keepingType="over all" itselfType="">
+                <instrument>i</instrument>
+            </calibrated>
+            <on_board mainType="and" keepingType="over all" itselfType="">
+                <instrument>i</instrument>
+                <satellite>s</satellite>
+            </on_board>
+            <power_on mainType="and" keepingType="over all" itselfType="">
+                <instrument>i</instrument>
+            </power_on>
+            <pointing mainType="and" keepingType="over all" itselfType="">
+                <direction>d</direction>
+                <satellite>s</satellite>
+            </pointing>
+            <power_on mainType="and" keepingType="at end" itselfType="">
+                <instrument>i</instrument>
+            </power_on>
+        </CONDITION>
+        <EFFECT>
+            <have_image mainType="and" keepingType="at end" itselfType="">
+                <direction>d</direction>
+                <mode>m</mode>
+            </have_image>
+        </EFFECT>
+    </ACTION>
+</DOMAIN>

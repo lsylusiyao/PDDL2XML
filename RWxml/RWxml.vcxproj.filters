@@ -27,6 +27,9 @@
     <ClCompile Include="WriteXML.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="backup.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\tinyxml2-7.0.1\tinyxml2.h">
