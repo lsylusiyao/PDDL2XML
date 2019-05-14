@@ -1,5 +1,6 @@
 ﻿#include "tinyxml2.h"
 #include "ReadFile.h"
+#include "WriteConsole.h"
 #include "WriteXML.h"
 
 int main()
@@ -10,11 +11,16 @@ int main()
 	auto predicates = readFile.GetPredicates();
 	auto allAction = readFile.GetAllAction();
 
-	WriteXMLClass writeFile("../Satellite.xml");
+	WriteConsoleClass writeConsole(head, predicates, allAction);
+	writeConsole.WriteHead2Console();
+	writeConsole.WritePredicates2Console();
+	writeConsole.WriteActions2Console();
+
+	/*WriteXMLClass writeFile("../Satellite.xml");
 	writeFile.WriteHead(head);
 	writeFile.WritePredicates(predicates);
 	writeFile.WriteAllAction(allAction);
-	writeFile.FinalStep(true);
+	writeFile.FinalStep(true);*/
 	
 	return 0;
 	

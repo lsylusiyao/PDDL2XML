@@ -30,6 +30,9 @@
     <ClCompile Include="backup.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="WriteConsole.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\tinyxml2-7.0.1\tinyxml2.h">
@@ -39,6 +42,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="WriteXML.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteConsole.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
