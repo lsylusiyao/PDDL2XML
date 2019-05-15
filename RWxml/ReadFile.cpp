@@ -232,3 +232,153 @@ vector<Action> ReadFileClass::GetAllAction()
 	allAction.push_back(DealAction(actionNum.back(), (int)allLine.size() - 2));
 	return allAction;
 }
+
+
+
+
+
+
+ReadProblemClass::ReadProblemClass(const char * path)
+	:in(path)
+{
+	fstream file;
+	file.open(path);
+	if (!file) throw new exception("文件没有找到");
+}
+
+void ReadProblemClass::RealAll()
+{
+	int lineNum = 0; //存储中的行号
+	while (getline(in, eachLine))
+	{
+		eachLine = regex_replace(eachLine, regex("//.*"), ""); //删除所有备注
+		eachLine = regex_replace(eachLine, regex(";;.*"), ""); //删除所有备注
+		if (!regex_search(eachLine, regex("\\S"))) //true表示一行只有空格和回车（不可见字符），即删除所有空行
+		{
+			eachLine = "";
+			continue;
+		}
+		if (eachLine.find("problem") != -1) partNum["problem"] = lineNum;
+		if (eachLine.find("domain") != -1) partNum["domain"] = lineNum;
+		if (eachLine.find("objects") != -1) partNum["objects"] = lineNum;
+		if (eachLine.find("init") != -1) partNum["init"] = lineNum;
+		if (eachLine.find("goal") != -1) partNum["goal"] = lineNum;
+		if (eachLine.find("metric") != -1) partNum["metric"] = lineNum;
+		lineNum++;
+		allLine.push_back(eachLine);
+		eachLine = "";
+	}
+}
+
+map<string, string> ReadProblemClass::GetHeadPart()
+{
+	map<string, string>resultReturn;
+	smatch result;
+
+	string tempS;
+
+	regex_search(allLine[partNum["problem"]], result, regex("problem ([0-9,a-z,-]*)"));
+	resultReturn["problem"] = result[1];
+
+	regex_search(allLine[partNum["domain"]], result, regex("domain ([a-z]*)"));
+	resultReturn["domain"] = result[1];
+
+	return resultReturn;
+}
+
+map<string, string> ReadProblemClass::GetObjects()
+{
+	string tempS;
+	smatch result;
+	
+	for (int i = partNum["objects"]; i < partNum["init"]; i++)
+	{
+		regex_search(tempS, result, regex("(\\S)* - (\\S)*"));
+		objects[result[1]] = result[2]; //1:名，2:类型
+
+	}
+
+	return objects;
+}
+
+vector<ProblemInit1> ReadProblemClass::GetInit()
+{
+	vector<ProblemInit1> vP;
+	string tempS;
+	smatch result;
+	for (int i = partNum["init"]; i < partNum["goal"]; i++)
+	{
+		tempS = allLine[i];
+		ProblemInit1 p;
+		if (tempS.find("init") != -1) continue;
+		if (regex_match(tempS, regex("\(\\:[a-z]*\\n"))) continue;
+		if (tempS.find("=") == -1) //没找到
+		{
+			p.isFunction = false;
+			regex_search(tempS, result, regex("([a-z_\\d.]+)"));
+			for (auto r : result)
+			{
+				if (r == *result.begin()) p.name = r;
+				p.param[r] = objects[r];
+			}
+		}
+		else
+		{
+			p.isFunction = true;
+			regex_search(tempS, result, regex("([a-z_\\d.]+)"));
+			for (auto r : result)
+			{
+				if (r == *result.begin()) p.name = r;
+				if (r == *result.end()) p.value = r;
+				p.param[r] = objects[r];
+			}
+		}
+		vP.push_back(p);
+	}
+	return vP;
+}
+
+vector<ProblemGoal1> ReadProblemClass::GetGoal()
+{
+	vector<ProblemGoal1> vp;
+	string mainType;
+	smatch result;
+	string type;
+	for (int i = partNum["goal"]; i < partNum["metric"]; i++)
+	{
+		string tempS = allLine[i];
+		ProblemGoal1 p;
+		if (tempS.find("goal") != -1)
+		{
+			regex_search(tempS, result, regex("([a-z_\\d.]+)"));
+			if (result.length() == 2) type = result[1];
+			continue;
+		}
+		if (regex_search(tempS, result, regex("and|or"))) type = result[0];
+		p.type = type;
+
+	}
+
+
+
+	return vp;
+}
+
+vector<ProblemMetric1> ReadProblemClass::GetMetric()
+{
+	return vector<ProblemMetric1>();
+}
+
+vector<string> ReadProblemClass::RegSearch0(string s, string rs, int which)
+{
+	vector<string> back;
+	regex patten("");
+	smatch m;
+	regex r(rs);
+	while (regex_search(s, m, r))
+	{
+		back.push_back(m[which]);
+		s = m.suffix().str();
+	}
+	return back;
+}

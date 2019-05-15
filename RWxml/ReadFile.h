@@ -58,3 +58,45 @@ private:
 
 };
 
+struct ProblemInit1 //这是一个的
+{
+	string name;
+	bool isFunction;
+	string type; //=function or BLANK
+	string value; // function's value
+	map<string, string> param;
+};
+
+struct ProblemGoal1
+{
+	string type;
+	string actionName;
+	map<string, string> param;
+};
+
+struct ProblemMetric1
+{
+	string type;
+	vector<string> goal;
+};
+
+class ReadProblemClass
+{
+public:
+	ReadProblemClass(const char* path);
+	void RealAll(); //读取文件并放到allLine中
+	map<string, string> GetHeadPart(); //把开始段的大部分处理完
+	map<string,string> GetObjects(); //获得object和变量
+	vector<ProblemInit1> GetInit();
+	vector<ProblemGoal1> GetGoal();
+	vector<ProblemMetric1> GetMetric(); //metric: <minimize>total_time</>
+
+private:
+	std::ifstream in;
+	string eachLine;
+	vector<string> allLine;
+	vector<string> RegSearch0(string s, string rs, int which = 0);
+	map<string, string> objects; //所有变量和变量类型对应
+	map<string, int> partNum;
+};
+
