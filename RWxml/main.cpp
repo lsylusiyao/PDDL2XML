@@ -11,10 +11,19 @@ int main()
 	auto predicates = readFile.GetPredicates();
 	auto allAction = readFile.GetAllAction();
 
-	WriteConsoleClass writeConsole(head, predicates, allAction);
+	ReadProblemClass readProblem("../SatelliteProblem.pddl");
+	readProblem.RealAll();
+	auto headProblem = readProblem.GetHeadPart();
+	auto objects = readProblem.GetObjects();
+	auto initProblem = readProblem.GetInit();
+	auto goalProblem = readProblem.GetGoal();
+	auto metricProblem = readProblem.GetMetric();
+	
+
+	/*WriteConsoleClass writeConsole(head, predicates, allAction);
 	writeConsole.WriteHead2Console();
 	writeConsole.WritePredicates2Console();
-	writeConsole.WriteActions2Console();
+	writeConsole.WriteActions2Console();*/
 
 	/*WriteXMLClass writeFile("../Satellite.xml");
 	writeFile.WriteHead(head);

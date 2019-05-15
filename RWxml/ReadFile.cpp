@@ -289,13 +289,14 @@ map<string, string> ReadProblemClass::GetHeadPart()
 map<string, string> ReadProblemClass::GetObjects()
 {
 	string tempS;
-	smatch result;
+	//smatch result;
 	
 	for (int i = partNum["objects"]; i < partNum["init"]; i++)
 	{
-		regex_search(tempS, result, regex("(\\S)* - (\\S)*"));
-		objects[result[1]] = result[2]; //1:名，2:类型
-
+		tempS = allLine[i];
+		auto result = RegSearch0(tempS, "\\w+");
+		//regex_search(tempS, result, regex("\\w+"));
+		if(result.size() >= 2) objects[result[0]] = result[1]; //1:名，2:类型
 	}
 
 	return objects;
@@ -311,25 +312,25 @@ vector<ProblemInit1> ReadProblemClass::GetInit()
 		tempS = allLine[i];
 		ProblemInit1 p;
 		if (tempS.find("init") != -1) continue;
-		if (regex_match(tempS, regex("\(\\:[a-z]*\\n"))) continue;
+		if (regex_match(tempS, regex("\\(\\:[a-z]*\\n"))) continue;
 		if (tempS.find("=") == -1) //没找到
 		{
 			p.isFunction = false;
-			regex_search(tempS, result, regex("([a-z_\\d.]+)"));
-			for (auto r : result)
+			auto allFound = RegSearch0(tempS, "([a-z_\\d.]+)");
+			for (auto r : allFound)
 			{
-				if (r == *result.begin()) p.name = r;
+				if (r == allFound[0]) { p.name = r; continue; }
 				p.param[r] = objects[r];
 			}
 		}
 		else
 		{
 			p.isFunction = true;
-			regex_search(tempS, result, regex("([a-z_\\d.]+)"));
-			for (auto r : result)
+			auto allFound = RegSearch0(tempS, "([\\w\\d.]+)");
+			for (auto r : allFound)
 			{
-				if (r == *result.begin()) p.name = r;
-				if (r == *result.end()) p.value = r;
+				if (r == *allFound.begin()) { p.name = r; continue; }
+				if (r == allFound.back()) { p.value = r; continue; }
 				p.param[r] = objects[r];
 			}
 		}
@@ -340,33 +341,44 @@ vector<ProblemInit1> ReadProblemClass::GetInit()
 
 vector<ProblemGoal1> ReadProblemClass::GetGoal()
 {
-	vector<ProblemGoal1> vp;
-	string mainType;
+	vector<ProblemGoal1> vP;
 	smatch result;
 	string type;
 	for (int i = partNum["goal"]; i < partNum["metric"]; i++)
 	{
 		string tempS = allLine[i];
 		ProblemGoal1 p;
-		if (tempS.find("goal") != -1)
-		{
-			regex_search(tempS, result, regex("([a-z_\\d.]+)"));
-			if (result.length() == 2) type = result[1];
-			continue;
-		}
-		if (regex_search(tempS, result, regex("and|or"))) type = result[0];
+		if (regex_search(tempS, regex(" +\\)"))) continue; //只有右括号和空格，没用
+		
+		if (regex_search(tempS, result, regex("and|or"))) //找到and or就记下来type
+			type = result[0];
 		p.type = type;
+		if(!regex_search(tempS, result, regex("\\((.*)\\)"))) continue; //抓括号中的
+		tempS = result[1];
+		auto allFound = RegSearch0(tempS, "([\\w\\d.]+)"); //把括号里面的东西循环
+		for (auto r : allFound)
+		{
+			if (r == *allFound.begin()) { p.actionName = r; continue; }
+			p.param[r] = objects[r];
+		}
 
+		vP.push_back(p);
 	}
 
-
-
-	return vp;
+	return vP;
 }
 
 vector<ProblemMetric1> ReadProblemClass::GetMetric()
 {
-	return vector<ProblemMetric1>();
+	string tempS = allLine[partNum["metric"]];
+	auto result = RegSearch0(tempS, "([\\w\\d-.]+)");
+	//regex_search(tempS, result, regex("([\\w\\d-.]+)"));
+	ProblemMetric1 p;
+	p.type = result[1];
+	p.goal.push_back(result[2]);
+	vector<ProblemMetric1> vP;
+	vP.push_back(p);
+	return vP;
 }
 
 vector<string> ReadProblemClass::RegSearch0(string s, string rs, int which)
