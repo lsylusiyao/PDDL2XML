@@ -62,7 +62,6 @@ struct ProblemInit1 //这是一个的
 {
 	string name;
 	bool isFunction;
-	string type; //=function or BLANK
 	string value; // function's value
 	map<string, string> param;
 };

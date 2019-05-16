@@ -37,7 +37,8 @@ public:
 private:
 	map<string, string> head;
 	map<string, string> objects;
-	vector<ProblemInit1> vI,
-		vector<ProblemGoal1> vG,
-		vector<ProblemMetric1> vM);
+	vector<ProblemInit1> vInit;
+	vector<ProblemGoal1> vGoal;
+	vector<ProblemMetric1> vMetric;
+	void WriteVariables(map<string, string> m, string headTab);
 };

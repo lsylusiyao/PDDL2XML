@@ -82,3 +82,80 @@ void WriteConsoleClass::WriteVariables(map<string, string> m, string headTab)
 		cout << headTab << m1.second << " " << m1.first << endl;
 	}
 }
+
+
+
+
+
+WriteConsoleProblemClass::WriteConsoleProblemClass
+(map<string, string> h, map<string, string> o, 
+	vector<ProblemInit1> vI, vector<ProblemGoal1> vG, 
+	vector<ProblemMetric1> vM)
+	:head(h), objects(o), vInit(vI), vGoal(vG), vMetric(vM) {}
+
+void WriteConsoleProblemClass::WriteHead2Console()
+{
+	cout << "Problem: " << head["problem"] << endl;
+	cout << "Domain: " << head["domain"] << endl;
+}
+
+void WriteConsoleProblemClass::WriteObjects2Console()
+{
+	cout << "Objects: " << endl;
+	WriteVariables(objects, "	");
+	cout << endl;
+}
+
+void WriteConsoleProblemClass::WriteInit2Console()
+{
+	cout << "Init: " << endl;
+	for (auto i : vInit)
+	{
+		if (i.isFunction)
+		{
+			cout << "	name: " << i.name << " (function, value = " 
+				<< i.value << ")" << endl;
+		}
+		else
+		{
+			cout << "	name: " << i.name << endl;
+		}
+		WriteVariables(i.param, "		");
+
+	}
+	cout << endl;
+}
+
+void WriteConsoleProblemClass::WriteGoal2Console()
+{
+	cout << "Goal: " << endl;
+	for (auto g : vGoal)
+	{
+		cout << "	name: " << g.actionName;
+		cout << ", " << g.type << endl;
+		WriteVariables(g.param, "		");
+	}
+	cout << endl;
+}
+
+void WriteConsoleProblemClass::WriteMetric2Console()
+{
+	cout << "Metric:" << endl;
+	for (auto m : vMetric)
+	{
+		cout << "	type: " << m.type << endl;
+		for (auto s : m.goal)
+		{
+			cout << "	goal: " << s << (s == m.goal.back() ? "" : ", ") << endl;
+		}
+	}
+	cout << endl;
+}
+
+void WriteConsoleProblemClass::WriteVariables(map<string, string> m, string headTab)
+{
+	for (auto m1 : m)
+	{
+		cout << headTab << m1.second << " " << m1.first << endl;
+	}
+}
