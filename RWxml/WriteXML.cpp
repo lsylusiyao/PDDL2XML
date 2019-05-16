@@ -116,3 +116,96 @@ void WriteXMLClass::WriteVariables(map<string, string> mapss, tinyxml2::XMLEleme
 		toInsert->InsertEndChild(variable);
 	}
 }
+
+
+
+
+WriteProblemXMLClass::WriteProblemXMLClass(const char * p)
+	:path(p)
+{
+	root = doc.NewElement("DOMAIN_PROBLEM");
+	doc.InsertEndChild(root);
+}
+
+void WriteProblemXMLClass::WriteHead(map<string, string> h)
+{
+	root->SetAttribute("problem", h["problem"].data());
+	root->SetAttribute("domain", h["domain"].data());
+}
+
+void WriteProblemXMLClass::WriteObjects(map<string, string> o)
+{
+	auto objects = doc.NewElement("OBJECTS");
+	WriteVariables(o, objects);
+	root->InsertEndChild(objects);
+}
+
+void WriteProblemXMLClass::WriteInitPart(vector<ProblemInit1> vI)
+{
+	auto init = doc.NewElement("INIT");
+	for (auto i : vI)
+	{
+		auto eachInit = doc.NewElement(i.name.data());
+		if (i.isFunction)
+		{
+			eachInit->SetAttribute("type", "function");
+			eachInit->SetAttribute("value", i.value.data());
+		}
+		else
+		{
+			eachInit->SetAttribute("type", "action");
+		}
+		WriteVariables(i.param, eachInit);
+		init->InsertEndChild(eachInit);
+	}
+	root->InsertEndChild(init);
+}
+
+void WriteProblemXMLClass::WriteGoalPart(vector<ProblemGoal1> vG)
+{
+	auto goal = doc.NewElement("GOAL");
+	for (auto g : vG)
+	{
+		auto eachOne = doc.NewElement(g.actionName.data());
+		eachOne->SetAttribute("mainType", g.type.data());
+		WriteVariables(g.param, eachOne);
+		goal->InsertEndChild(eachOne);
+	}
+	root->InsertEndChild(goal);
+}
+
+void WriteProblemXMLClass::WriteMetricPart(vector<ProblemMetric1> vM)
+{
+	auto metric = doc.NewElement("METRIC");
+	for (auto m : vM)
+	{
+		for (auto n : m.goal)
+		{
+			auto eachOne = doc.NewElement(n.data());
+			eachOne->SetAttribute("goal", m.type.data());
+			metric->InsertEndChild(eachOne);
+		}
+	}
+	root->InsertEndChild(metric);
+}
+
+
+
+void WriteProblemXMLClass::WriteVariables(map<string, string> mapss, tinyxml2::XMLElement * toInsert)
+{
+	//把mpa里面的变量按照格式写入XMLElement中
+	XMLElement* variable;
+	for (auto m : mapss)
+	{
+		if (m.first.size() == 0) continue;
+		variable = doc.NewElement(m.second.data()); //<instrument>
+		variable->InsertEndChild(doc.NewText(m.first.data())); //i
+		toInsert->InsertEndChild(variable);
+	}
+}
+
+void WriteProblemXMLClass::FinalStep(bool write2File)
+{
+	if (write2File) doc.SaveFile(path);
+	else doc.Print();
+}
