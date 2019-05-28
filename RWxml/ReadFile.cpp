@@ -79,7 +79,7 @@ void ReadFileClass::Predicates()
 	string type;
 	string variableType;
 	string variable;
-	for (int i = partNum["predicates"]; i < partNum["functions"]; i++)
+	for (int i = partNum["predicates"] + 1; i < partNum["functions"]; i++)
 	{
 		map<string, string> variableMap;
 		tempS = allLine[i];
@@ -238,9 +238,6 @@ void ReadFileClass::AllAction()
 
 
 
-
-
-
 ReadProblemClass::ReadProblemClass(const char * path)
 	:in(path)
 {
@@ -315,7 +312,7 @@ void ReadProblemClass::Init()
 {
 	string tempS;
 	smatch result;
-	for (int i = partNum["init"]; i < partNum["goal"]; i++)
+	for (int i = partNum["init"]; i < partNum["goal"] - 1; i++)
 	{
 		tempS = allLine[i];
 		ProblemInit1 p;
@@ -350,7 +347,7 @@ void ReadProblemClass::Goal()
 {
 	smatch result;
 	string type;
-	for (int i = partNum["goal"]; i < partNum["metric"]; i++)
+	for (int i = partNum["goal"]; i < partNum["metric"] - 1; i++)
 	{
 		string tempS = allLine[i];
 		ProblemGoal1 p;

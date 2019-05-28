@@ -39,5 +39,6 @@ private:
 	void ConnectStartReadButtons();
 	void ConnectShowDomainDataButtons();
 	void ConnectShowProblemDataButtons();
-
+	void LoadDomain();
+	void LoadProblem();
 };
