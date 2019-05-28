@@ -128,8 +128,8 @@
            <widget class="QPushButton" name="writeXMLButton">
             <property name="geometry">
              <rect>
-              <x>10</x>
-              <y>40</y>
+              <x>400</x>
+              <y>340</y>
               <width>111</width>
               <height>31</height>
              </rect>
@@ -144,7 +144,7 @@
              <string>写入XML并显示</string>
             </property>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>140</x>
@@ -335,8 +335,8 @@
            <widget class="QPushButton" name="writeXMLButton_Problem">
             <property name="geometry">
              <rect>
-              <x>10</x>
-              <y>40</y>
+              <x>360</x>
+              <y>360</y>
               <width>111</width>
               <height>31</height>
              </rect>
@@ -421,7 +421,7 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>130</x>

@@ -114,6 +114,9 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\RWxml\ReadFile.cpp" />
+    <ClCompile Include="..\RWxml\WriteXML.cpp" />
+    <ClCompile Include="..\tinyxml2-7.0.1\tinyxml2.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QtPDDL2XML.cpp" />
   </ItemGroup>
@@ -125,6 +128,11 @@
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="QtPDDL2XML.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\RWxml\ReadFile.h" />
+    <ClInclude Include="..\RWxml\WriteXML.h" />
+    <ClInclude Include="..\tinyxml2-7.0.1\tinyxml2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

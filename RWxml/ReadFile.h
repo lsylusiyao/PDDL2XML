@@ -41,14 +41,13 @@ public:
 	void ReadOthers();
 	map<string, string> mostHeadPart;
 	map<string, map<string, string>> predicates;
-	vector<Action> allAction;
+	vector<Action> allAction;//所有action
 
 	
 private:
 	Action DealAction(int startLine, int endLine);
 	vector<string> RegSearch0(string s, string rs,int which = 0);
 
-	vector<Action> allAction; //所有action
 	string eachLine; //每一行的字符串
 	std::ifstream in; //输入流
 	vector<string> allLine; //每一行一个string

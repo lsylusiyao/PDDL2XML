@@ -2,6 +2,8 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QTextBrowser>
+#include <QMessageBox>
+#include <QErrorMessage>
 
 
 
@@ -17,14 +19,21 @@ class QtPDDL2XML : public QMainWindow
 
 public:
 	QtPDDL2XML(QWidget *parent = Q_NULLPTR);
-	
+	void CreateMessage(QString title, QString message);
+	void CreateError(QString title, QString message);
 
 private:
 	Ui::QtPDDL2XMLClass ui;
-	ReadFileClass readFile;
-	ReadProblemClass readProblem;
-	WriteXMLClass writeFile;
+
+	bool isDomainRead = false;
+	bool isProblemRead = false;
+
+	ReadFileClass readDomainFile;
+	ReadProblemClass readProblemFile;
+	WriteXMLClass writeDomainFile;
 	WriteProblemXMLClass writeProblemFile;
+
+
 	void ConnectSwitchButtons();
 	void ConnectWriteXMLButtons();
 	void ConnectStartReadButtons();
