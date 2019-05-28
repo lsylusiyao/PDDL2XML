@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
-
+#include <QTextBrowser>
 
 
 
@@ -17,7 +17,18 @@ class QtPDDL2XML : public QMainWindow
 
 public:
 	QtPDDL2XML(QWidget *parent = Q_NULLPTR);
+	
 
 private:
 	Ui::QtPDDL2XMLClass ui;
+	ReadFileClass readFile;
+	ReadProblemClass readProblem;
+	WriteXMLClass writeFile;
+	WriteProblemXMLClass writeProblemFile;
+	void ConnectSwitchButtons();
+	void ConnectWriteXMLButtons();
+	void ConnectStartReadButtons();
+	void ConnectShowDomainDataButtons();
+	void ConnectShowProblemDataButtons();
+
 };

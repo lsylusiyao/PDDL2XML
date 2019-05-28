@@ -16,13 +16,11 @@ int main()
 {
 	ReadFileClass readFile("../Satellite.pddl");
 	readFile.RealAll();
-	map<string, string> head = readFile.GetMostHeadPart();
-	auto predicates = readFile.GetPredicates();
-	auto allAction = readFile.GetAllAction();
+	readFile.ReadOthers();
 
 	if (WRITE_2_CONSOLE)
 	{
-		WriteConsoleClass writeConsole(head, predicates, allAction);
+		WriteConsoleClass writeConsole(readFile.mostHeadPart, readFile.predicates, readFile.allAction);
 		writeConsole.WriteHead2Console();
 		writeConsole.WritePredicates2Console();
 		writeConsole.WriteActions2Console();
@@ -32,9 +30,9 @@ int main()
 	if (WRITE_2_XML)
 	{
 		WriteXMLClass writeFile("../Satellite.xml");
-		writeFile.WriteHead(head);
-		writeFile.WritePredicates(predicates);
-		writeFile.WriteAllAction(allAction);
+		writeFile.WriteHead(readFile.mostHeadPart);
+		writeFile.WritePredicates(readFile.predicates);
+		writeFile.WriteAllAction(readFile.allAction);
 		writeFile.FinalStep(WRITE_2_XML_FILE);
 	}
 	
@@ -42,16 +40,13 @@ int main()
 
 	ReadProblemClass readProblem("../SatelliteProblem.pddl");
 	readProblem.RealAll();
-	auto headProblem = readProblem.GetHeadPart();
-	auto objects = readProblem.GetObjects();
-	auto initProblem = readProblem.GetInit();
-	auto goalProblem = readProblem.GetGoal();
-	auto metricProblem = readProblem.GetMetric();
+	readProblem.ReadOthers();
 
 	if (WRITE_PROBLEM_2_CONSOLE)
 	{
 		WriteConsoleProblemClass writeProblemConsole
-		(headProblem, objects, initProblem, goalProblem, metricProblem);
+		(readProblem.headPart, readProblem.objects, 
+			readProblem.init, readProblem.goal, readProblem.metric);
 		writeProblemConsole.WriteHead2Console();
 		writeProblemConsole.WriteObjects2Console();
 		writeProblemConsole.WriteInit2Console();
@@ -63,11 +58,11 @@ int main()
 	if (WRITE_PROBLEM_2_XML)
 	{
 		WriteProblemXMLClass writeProblemFile("../SatelliteProblem.xml");
-		writeProblemFile.WriteHead(headProblem);
-		writeProblemFile.WriteObjects(objects);
-		writeProblemFile.WriteInitPart(initProblem);
-		writeProblemFile.WriteGoalPart(goalProblem);
-		writeProblemFile.WriteMetricPart(metricProblem);
+		writeProblemFile.WriteHead(readProblem.headPart);
+		writeProblemFile.WriteObjects(readProblem.objects);
+		writeProblemFile.WriteInitPart(readProblem.init);
+		writeProblemFile.WriteGoalPart(readProblem.goal);
+		writeProblemFile.WriteMetricPart(readProblem.metric);
 		writeProblemFile.FinalStep(WRITE_PROBLEM_2_XML_FILE);
 	}
 	

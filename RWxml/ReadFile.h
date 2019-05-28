@@ -38,9 +38,10 @@ public:
 	ReadFileClass(const char* path);
 	~ReadFileClass();
 	void RealAll(); //读取文件并放到allLine中
-	map<string,string> GetMostHeadPart(); //把开始段的大部分处理完
-	map<string, map<string, string>> GetPredicates(); //<变量名，变量类型>
-	vector<Action> GetAllAction(); //处理所有action
+	void ReadOthers();
+	map<string, string> mostHeadPart;
+	map<string, map<string, string>> predicates;
+	vector<Action> allAction;
 
 	
 private:
@@ -55,7 +56,9 @@ private:
 	vector<int> actionNum; //每个action的行号
 	map<string, string> allType; //所有类型，字典
 	
-
+	void MostHeadPart(); //把开始段的大部分处理完
+	void Predicates(); //<变量名，变量类型>
+	void AllAction(); //处理所有action
 };
 
 struct ProblemInit1 //这是一个的
@@ -84,18 +87,26 @@ class ReadProblemClass
 public:
 	ReadProblemClass(const char* path);
 	void RealAll(); //读取文件并放到allLine中
-	map<string, string> GetHeadPart(); //把开始段的大部分处理完
-	map<string,string> GetObjects(); //获得object和变量
-	vector<ProblemInit1> GetInit();
-	vector<ProblemGoal1> GetGoal();
-	vector<ProblemMetric1> GetMetric(); //metric: <minimize>total_time</>
+	void ReadOthers();
+	map<string, string> headPart;
+	map<string, string> objects; //所有变量和变量类型对应
+	vector<ProblemInit1> init;
+	vector<ProblemGoal1> goal;
+	vector<ProblemMetric1> metric;
 
 private:
 	std::ifstream in;
 	string eachLine;
 	vector<string> allLine;
 	vector<string> RegSearch0(string s, string rs, int which = 0);
-	map<string, string> objects; //所有变量和变量类型对应
 	map<string, int> partNum;
+
+	void HeadPart(); //把开始段的大部分处理完
+	void Objects(); //获得object和变量
+	void Init();
+	void Goal();
+	void Metric(); //metric: <minimize>total_time</>
+
+	
 };
 

@@ -39,16 +39,22 @@ void ReadFileClass::RealAll()
 	}
 }
 
-map<string, string> ReadFileClass::GetMostHeadPart()
+void ReadFileClass::ReadOthers()
 {
-	map<string, string>resultReturn;
+	MostHeadPart();
+	Predicates();
+	AllAction();
+}
+
+void ReadFileClass::MostHeadPart()
+{
 	smatch result;
 
 	string tempS;
 	string finalS("");
 
 	regex_search(allLine[partNum["domain"]],result,regex("domain ([a-z]*)"));
-	resultReturn["domain"] = result[1];
+	mostHeadPart["domain"] = result[1];
 
 	auto result2 = RegSearch0(allLine[partNum["requirements"]], ":([a-z,-]*)");
 	//regex_search(allLine[partNum["requirements"]], result, regex(":([a-z,-]*)")); //注意这里匹配的不完全对
@@ -59,17 +65,15 @@ map<string, string> ReadFileClass::GetMostHeadPart()
 		tempS.erase(tempS.begin());
 		finalS += tempS + (i == result2.size() - 1 ? "" : ", ");
 	}
-	resultReturn["requirements"] = finalS;
+	mostHeadPart["requirements"] = finalS;
 
 	regex_search(allLine[partNum["types"]], result, regex(":types (.*)\\)"));
-	resultReturn["types"] = regex_replace(result[1].str(), regex("\\ "), ", "); //空格改成逗号空格
+	mostHeadPart["types"] = regex_replace(result[1].str(), regex("\\ "), ", "); //空格改成逗号空格
 
-	return resultReturn;
 }
 
-map<string, map<string, string>> ReadFileClass::GetPredicates()
+void ReadFileClass::Predicates()
 {
-	map<string, map<string, string>> all;
 	smatch result;
 	string tempS;
 	string type;
@@ -93,10 +97,10 @@ map<string, map<string, string>> ReadFileClass::GetPredicates()
 			variableMap[variable] = variableType;
 			allType[variable] = variableType; //这里即使是覆盖也不影响
 		}
-		all[type] = variableMap;
+		predicates[type] = variableMap;
 		
 	}
-	return all;
+
 }
 
 Action ReadFileClass::DealAction(int startLine, int endLine)
@@ -223,14 +227,13 @@ vector<string> ReadFileClass::RegSearch0(string s, string rs,int which)
 	return back;
 }
 
-vector<Action> ReadFileClass::GetAllAction()
+void ReadFileClass::AllAction()
 {
 	for (int i = 1; i < actionNum.size() - 1; i++)
 	{
 		allAction.push_back(DealAction(actionNum[i], actionNum[i + 1] - 1));
 	}
 	allAction.push_back(DealAction(actionNum.back(), (int)allLine.size() - 2));
-	return allAction;
 }
 
 
@@ -270,23 +273,30 @@ void ReadProblemClass::RealAll()
 	}
 }
 
-map<string, string> ReadProblemClass::GetHeadPart()
+void ReadProblemClass::ReadOthers()
 {
-	map<string, string>resultReturn;
+	HeadPart();
+	Objects();
+	Init();
+	Goal();
+	Metric();
+}
+
+void ReadProblemClass::HeadPart()
+{
 	smatch result;
 
 	string tempS;
 
 	regex_search(allLine[partNum["problem"]], result, regex("problem ([0-9,a-z,-]*)"));
-	resultReturn["problem"] = result[1];
+	headPart["problem"] = result[1];
 
 	regex_search(allLine[partNum["domain"]], result, regex("domain ([a-z]*)"));
-	resultReturn["domain"] = result[1];
+	headPart["domain"] = result[1];
 
-	return resultReturn;
 }
 
-map<string, string> ReadProblemClass::GetObjects()
+void ReadProblemClass::Objects()
 {
 	string tempS;
 	//smatch result;
@@ -299,12 +309,10 @@ map<string, string> ReadProblemClass::GetObjects()
 		if(result.size() >= 2) objects[result[0]] = result[1]; //1:名，2:类型
 	}
 
-	return objects;
 }
 
-vector<ProblemInit1> ReadProblemClass::GetInit()
+void ReadProblemClass::Init()
 {
-	vector<ProblemInit1> vP;
 	string tempS;
 	smatch result;
 	for (int i = partNum["init"]; i < partNum["goal"]; i++)
@@ -334,14 +342,12 @@ vector<ProblemInit1> ReadProblemClass::GetInit()
 				p.param[r] = objects[r];
 			}
 		}
-		vP.push_back(p);
+		init.push_back(p);
 	}
-	return vP;
 }
 
-vector<ProblemGoal1> ReadProblemClass::GetGoal()
+void ReadProblemClass::Goal()
 {
-	vector<ProblemGoal1> vP;
 	smatch result;
 	string type;
 	for (int i = partNum["goal"]; i < partNum["metric"]; i++)
@@ -362,13 +368,12 @@ vector<ProblemGoal1> ReadProblemClass::GetGoal()
 			p.param[r] = objects[r];
 		}
 
-		vP.push_back(p);
+		goal.push_back(p);
 	}
 
-	return vP;
 }
 
-vector<ProblemMetric1> ReadProblemClass::GetMetric()
+void ReadProblemClass::Metric()
 {
 	string tempS = allLine[partNum["metric"]];
 	auto result = RegSearch0(tempS, "([\\w\\d-.]+)");
@@ -376,9 +381,8 @@ vector<ProblemMetric1> ReadProblemClass::GetMetric()
 	ProblemMetric1 p;
 	p.type = result[1];
 	p.goal.push_back(result[2]);
-	vector<ProblemMetric1> vP;
-	vP.push_back(p);
-	return vP;
+	vector<ProblemMetric1> metric;
+	metric.push_back(p);
 }
 
 vector<string> ReadProblemClass::RegSearch0(string s, string rs, int which)
