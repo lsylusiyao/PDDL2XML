@@ -70,16 +70,16 @@ public:
     QGridLayout *gridLayout_2;
     QLabel *label_5;
     QComboBox *problemObjectsBox;
-    QPushButton *showProblemObjectsBox;
+    QPushButton *showProblemObjectsButton;
     QLabel *label_6;
     QComboBox *problemInitBox;
-    QPushButton *showProblemInitBox;
+    QPushButton *showProblemInitButton;
     QLabel *label_7;
     QComboBox *problemGoalBox;
-    QPushButton *showProblemGoalBox;
+    QPushButton *showProblemGoalButton;
     QLabel *label_10;
     QComboBox *problemMetricBox;
-    QPushButton *showProblemMetricBox;
+    QPushButton *showProblemMetricButton;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -118,17 +118,18 @@ public:
         switch2ProblemButton->setFont(font);
         startReadDomainButton = new QPushButton(page);
         startReadDomainButton->setObjectName(QString::fromUtf8("startReadDomainButton"));
-        startReadDomainButton->setGeometry(QRect(20, 210, 81, 31));
+        startReadDomainButton->setGeometry(QRect(0, 210, 81, 31));
         QFont font1;
         font1.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
         font1.setPointSize(12);
         startReadDomainButton->setFont(font1);
         domainTextBrowser = new QTextBrowser(page);
         domainTextBrowser->setObjectName(QString::fromUtf8("domainTextBrowser"));
-        domainTextBrowser->setGeometry(QRect(565, 70, 411, 411));
+        domainTextBrowser->setGeometry(QRect(485, 60, 491, 441));
+        domainTextBrowser->setFont(font1);
         label_4 = new QLabel(page);
         label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(662, 31, 72, 25));
+        label_4->setGeometry(QRect(662, 21, 72, 25));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -137,15 +138,15 @@ public:
         label_4->setFont(font1);
         domainLineEdit = new QLineEdit(page);
         domainLineEdit->setObjectName(QString::fromUtf8("domainLineEdit"));
-        domainLineEdit->setGeometry(QRect(750, 30, 113, 31));
+        domainLineEdit->setGeometry(QRect(750, 20, 113, 31));
         domainLineEdit->setFont(font);
         writeXMLButton = new QPushButton(page);
         writeXMLButton->setObjectName(QString::fromUtf8("writeXMLButton"));
-        writeXMLButton->setGeometry(QRect(400, 340, 111, 31));
+        writeXMLButton->setGeometry(QRect(350, 340, 111, 31));
         writeXMLButton->setFont(font);
         layoutWidget = new QWidget(page);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(140, 160, 371, 131));
+        layoutWidget->setGeometry(QRect(90, 160, 371, 131));
         gridLayout = new QGridLayout(layoutWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -226,14 +227,15 @@ public:
         switch2DomainButton->setFont(font);
         problemTextBrowser = new QTextBrowser(page_2);
         problemTextBrowser->setObjectName(QString::fromUtf8("problemTextBrowser"));
-        problemTextBrowser->setGeometry(QRect(555, 80, 411, 411));
+        problemTextBrowser->setGeometry(QRect(455, 80, 511, 421));
+        problemTextBrowser->setFont(font1);
         startReadProblemButton = new QPushButton(page_2);
         startReadProblemButton->setObjectName(QString::fromUtf8("startReadProblemButton"));
         startReadProblemButton->setGeometry(QRect(10, 220, 81, 31));
         startReadProblemButton->setFont(font1);
         writeXMLButton_Problem = new QPushButton(page_2);
         writeXMLButton_Problem->setObjectName(QString::fromUtf8("writeXMLButton_Problem"));
-        writeXMLButton_Problem->setGeometry(QRect(360, 360, 111, 31));
+        writeXMLButton_Problem->setGeometry(QRect(330, 360, 111, 31));
         writeXMLButton_Problem->setFont(font);
         layoutWidget1 = new QWidget(page_2);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
@@ -273,7 +275,7 @@ public:
 
         layoutWidget2 = new QWidget(page_2);
         layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(130, 140, 341, 191));
+        layoutWidget2->setGeometry(QRect(100, 140, 341, 191));
         gridLayout_2 = new QGridLayout(layoutWidget2);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -294,11 +296,11 @@ public:
 
         gridLayout_2->addWidget(problemObjectsBox, 0, 1, 1, 1);
 
-        showProblemObjectsBox = new QPushButton(layoutWidget2);
-        showProblemObjectsBox->setObjectName(QString::fromUtf8("showProblemObjectsBox"));
-        showProblemObjectsBox->setFont(font1);
+        showProblemObjectsButton = new QPushButton(layoutWidget2);
+        showProblemObjectsButton->setObjectName(QString::fromUtf8("showProblemObjectsButton"));
+        showProblemObjectsButton->setFont(font1);
 
-        gridLayout_2->addWidget(showProblemObjectsBox, 0, 2, 1, 1);
+        gridLayout_2->addWidget(showProblemObjectsButton, 0, 2, 1, 1);
 
         label_6 = new QLabel(layoutWidget2);
         label_6->setObjectName(QString::fromUtf8("label_6"));
@@ -315,11 +317,11 @@ public:
 
         gridLayout_2->addWidget(problemInitBox, 1, 1, 1, 1);
 
-        showProblemInitBox = new QPushButton(layoutWidget2);
-        showProblemInitBox->setObjectName(QString::fromUtf8("showProblemInitBox"));
-        showProblemInitBox->setFont(font1);
+        showProblemInitButton = new QPushButton(layoutWidget2);
+        showProblemInitButton->setObjectName(QString::fromUtf8("showProblemInitButton"));
+        showProblemInitButton->setFont(font1);
 
-        gridLayout_2->addWidget(showProblemInitBox, 1, 2, 1, 1);
+        gridLayout_2->addWidget(showProblemInitButton, 1, 2, 1, 1);
 
         label_7 = new QLabel(layoutWidget2);
         label_7->setObjectName(QString::fromUtf8("label_7"));
@@ -336,11 +338,11 @@ public:
 
         gridLayout_2->addWidget(problemGoalBox, 2, 1, 1, 1);
 
-        showProblemGoalBox = new QPushButton(layoutWidget2);
-        showProblemGoalBox->setObjectName(QString::fromUtf8("showProblemGoalBox"));
-        showProblemGoalBox->setFont(font1);
+        showProblemGoalButton = new QPushButton(layoutWidget2);
+        showProblemGoalButton->setObjectName(QString::fromUtf8("showProblemGoalButton"));
+        showProblemGoalButton->setFont(font1);
 
-        gridLayout_2->addWidget(showProblemGoalBox, 2, 2, 1, 1);
+        gridLayout_2->addWidget(showProblemGoalButton, 2, 2, 1, 1);
 
         label_10 = new QLabel(layoutWidget2);
         label_10->setObjectName(QString::fromUtf8("label_10"));
@@ -357,11 +359,11 @@ public:
 
         gridLayout_2->addWidget(problemMetricBox, 3, 1, 1, 1);
 
-        showProblemMetricBox = new QPushButton(layoutWidget2);
-        showProblemMetricBox->setObjectName(QString::fromUtf8("showProblemMetricBox"));
-        showProblemMetricBox->setFont(font1);
+        showProblemMetricButton = new QPushButton(layoutWidget2);
+        showProblemMetricButton->setObjectName(QString::fromUtf8("showProblemMetricButton"));
+        showProblemMetricButton->setFont(font1);
 
-        gridLayout_2->addWidget(showProblemMetricBox, 3, 2, 1, 1);
+        gridLayout_2->addWidget(showProblemMetricButton, 3, 2, 1, 1);
 
         gridLayout_2->setColumnStretch(0, 2);
         gridLayout_2->setColumnStretch(1, 5);
@@ -413,13 +415,13 @@ public:
         label_9->setText(QApplication::translate("QtPDDL2XMLClass", "Problem\357\274\232", nullptr));
         label_8->setText(QApplication::translate("QtPDDL2XMLClass", "Domain\357\274\232", nullptr));
         label_5->setText(QApplication::translate("QtPDDL2XMLClass", "Objects", nullptr));
-        showProblemObjectsBox->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
+        showProblemObjectsButton->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
         label_6->setText(QApplication::translate("QtPDDL2XMLClass", "Init", nullptr));
-        showProblemInitBox->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
+        showProblemInitButton->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
         label_7->setText(QApplication::translate("QtPDDL2XMLClass", "Goal", nullptr));
-        showProblemGoalBox->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
+        showProblemGoalButton->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
         label_10->setText(QApplication::translate("QtPDDL2XMLClass", "Metric", nullptr));
-        showProblemMetricBox->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
+        showProblemMetricButton->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
     } // retranslateUi
 
 };

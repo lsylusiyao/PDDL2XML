@@ -4,6 +4,7 @@
 #include <QTextBrowser>
 #include <QMessageBox>
 #include <QErrorMessage>
+#include <QTextStream>
 
 
 
@@ -41,4 +42,6 @@ private:
 	void ConnectShowProblemDataButtons();
 	void LoadDomain();
 	void LoadProblem();
+	void WriteAction(QTextStream &out, Action a, int numMain);
+	void WriteVariables(QTextStream & out, map<string, string> m, QString headTab);
 };

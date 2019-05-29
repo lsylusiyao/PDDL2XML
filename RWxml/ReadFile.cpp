@@ -321,7 +321,7 @@ void ReadProblemClass::Init()
 		if (tempS.find("=") == -1) //√ª’“µΩ
 		{
 			p.isFunction = false;
-			auto allFound = RegSearch0(tempS, "([a-z_\\d.]+)");
+			auto allFound = RegSearch0(tempS, "([a-zA-Z_\\d.]+)");
 			for (auto r : allFound)
 			{
 				if (r == allFound[0]) { p.name = r; continue; }
@@ -378,7 +378,6 @@ void ReadProblemClass::Metric()
 	ProblemMetric1 p;
 	p.type = result[1];
 	p.goal.push_back(result[2]);
-	vector<ProblemMetric1> metric;
 	metric.push_back(p);
 }
 
