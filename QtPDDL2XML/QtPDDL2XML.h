@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QErrorMessage>
 #include <QTextStream>
-
+#include <QComboBox>
 
 
 #include "ui_QtPDDL2XML.h"
@@ -43,5 +43,5 @@ private:
 	void LoadDomain();
 	void LoadProblem();
 	void WriteAction(QTextStream &out, Action a, int numMain);
-	void WriteVariables(QTextStream & out, map<string, string> m, QString headTab);
+	void WriteVariables(QTextStream & out, map<string, string> m, QString headTab, QString certain);
 };

@@ -55,6 +55,13 @@ public:
     QLabel *label_3;
     QComboBox *domainActionBox;
     QPushButton *showDomainActionButton;
+    QLabel *label_11;
+    QWidget *widget;
+    QGridLayout *gridLayout_4;
+    QLabel *label_12;
+    QComboBox *domainActionConditionBox;
+    QLabel *label_13;
+    QComboBox *domainActionEffectBox;
     QWidget *page_2;
     QPushButton *switch2DomainButton;
     QTextBrowser *problemTextBrowser;
@@ -142,7 +149,7 @@ public:
         domainLineEdit->setFont(font);
         writeXMLButton = new QPushButton(page);
         writeXMLButton->setObjectName(QString::fromUtf8("writeXMLButton"));
-        writeXMLButton->setGeometry(QRect(350, 340, 111, 31));
+        writeXMLButton->setGeometry(QRect(370, 340, 111, 31));
         writeXMLButton->setFont(font);
         layoutWidget = new QWidget(page);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
@@ -218,6 +225,50 @@ public:
         gridLayout->setColumnStretch(0, 2);
         gridLayout->setColumnStretch(1, 5);
         gridLayout->setColumnStretch(2, 2);
+        label_11 = new QLabel(page);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+        label_11->setGeometry(QRect(0, 330, 79, 30));
+        sizePolicy.setHeightForWidth(label_11->sizePolicy().hasHeightForWidth());
+        label_11->setSizePolicy(sizePolicy);
+        label_11->setFont(font1);
+        widget = new QWidget(page);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(90, 310, 271, 81));
+        gridLayout_4 = new QGridLayout(widget);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        gridLayout_4->setContentsMargins(0, 0, 0, 0);
+        label_12 = new QLabel(widget);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+        sizePolicy.setHeightForWidth(label_12->sizePolicy().hasHeightForWidth());
+        label_12->setSizePolicy(sizePolicy);
+        label_12->setFont(font1);
+
+        gridLayout_4->addWidget(label_12, 0, 0, 1, 1);
+
+        domainActionConditionBox = new QComboBox(widget);
+        domainActionConditionBox->setObjectName(QString::fromUtf8("domainActionConditionBox"));
+        domainActionConditionBox->setFont(font1);
+
+        gridLayout_4->addWidget(domainActionConditionBox, 0, 1, 1, 1);
+
+        label_13 = new QLabel(widget);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+        sizePolicy.setHeightForWidth(label_13->sizePolicy().hasHeightForWidth());
+        label_13->setSizePolicy(sizePolicy);
+        label_13->setFont(font1);
+
+        gridLayout_4->addWidget(label_13, 1, 0, 1, 1);
+
+        domainActionEffectBox = new QComboBox(widget);
+        domainActionEffectBox->setObjectName(QString::fromUtf8("domainActionEffectBox"));
+        domainActionEffectBox->setFont(font1);
+
+        gridLayout_4->addWidget(domainActionEffectBox, 1, 1, 1, 1);
+
+        gridLayout_4->setColumnStretch(0, 1);
+        gridLayout_4->setColumnStretch(1, 2);
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName(QString::fromUtf8("page_2"));
@@ -409,6 +460,9 @@ public:
         showDomainPredicateButton->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
         label_3->setText(QApplication::translate("QtPDDL2XMLClass", "Action", nullptr));
         showDomainActionButton->setText(QApplication::translate("QtPDDL2XMLClass", "\346\230\276\347\244\272\346\225\260\346\215\256", nullptr));
+        label_11->setText(QApplication::translate("QtPDDL2XMLClass", "For Action", nullptr));
+        label_12->setText(QApplication::translate("QtPDDL2XMLClass", "Condition", nullptr));
+        label_13->setText(QApplication::translate("QtPDDL2XMLClass", "Effect", nullptr));
         switch2DomainButton->setText(QApplication::translate("QtPDDL2XMLClass", "\345\210\207\346\215\242\350\207\263Domain", nullptr));
         startReadProblemButton->setText(QApplication::translate("QtPDDL2XMLClass", "\345\274\200\345\247\213\350\257\273\345\217\226", nullptr));
         writeXMLButton_Problem->setText(QApplication::translate("QtPDDL2XMLClass", "\345\206\231\345\205\245XML\345\271\266\346\230\276\347\244\272", nullptr));

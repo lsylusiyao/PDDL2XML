@@ -185,6 +185,20 @@ void QtPDDL2XML::ConnectShowDomainDataButtons()
 		}
 		ui.domainTextBrowser->setText(out.readAll());
 	});
+
+	connect(ui.domainActionBox, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [&](const QString& cq) {
+		ui.domainActionConditionBox->clear();
+		ui.domainActionEffectBox->clear();
+		if (cq == "ALL")
+		{
+			ui.domainActionConditionBox->addItem("ALL");
+			ui.domainActionEffectBox->addItem("ALL");
+		}
+		else
+		{
+
+		}
+	});
 }
 
 void QtPDDL2XML::ConnectShowProblemDataButtons()
@@ -380,6 +394,9 @@ void QtPDDL2XML::WriteAction(QTextStream &out, Action a, int numMain)
 		WriteVariables(out, a.duration.param, "			");
 	}
 	out << endl;
+
+	
+
 	int num = 1;
 	for (auto m1 : a.condition)
 	{
@@ -407,10 +424,18 @@ void QtPDDL2XML::WriteAction(QTextStream &out, Action a, int numMain)
 
 }
 
-void QtPDDL2XML::WriteVariables(QTextStream &out, map<string, string> m, QString headTab)
+void QtPDDL2XML::WriteVariables(QTextStream &out, map<string, string> m, QString headTab, QString certain = "")
 {
-	for (auto m1 : m)
+	if (certain == "")
 	{
-		out << headTab << QString::fromStdString(m1.second) << " " << QString::fromStdString(m1.first) << endl;
+		for (auto m1 : m)
+			{
+				out << headTab << QString::fromStdString(m1.second) << " " << QString::fromStdString(m1.first) << endl;
+			}
 	}
+	else
+	{
+		out << headTab << m[certain.toStdString()].data() << " " << certain << endl;
+	}
+	
 }
