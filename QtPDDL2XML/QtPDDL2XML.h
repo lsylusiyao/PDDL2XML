@@ -42,6 +42,6 @@ private:
 	void ConnectShowProblemDataButtons();
 	void LoadDomain();
 	void LoadProblem();
-	void WriteAction(QTextStream &out, Action a, int numMain);
-	void WriteVariables(QTextStream & out, map<string, string> m, QString headTab, QString certain);
+	void WriteAction(QTextStream &out, Action a, int numMain, const QString& condition = "", const QString& effect = "");
+	void WriteVariables(QTextStream & out, map<string, string> m, QString headTab, QString certain = "");
 };

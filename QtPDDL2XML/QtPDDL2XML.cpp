@@ -170,6 +170,7 @@ void QtPDDL2XML::ConnectShowDomainDataButtons()
 		QString choice(ui.domainActionBox->currentText());
 		if (choice == "ALL")
 		{
+			//这里就不管其他两个是怎么选的了
 			int actionNum = 1;
 			for (auto a : readDomainFile.allAction)
 				WriteAction(out, a, actionNum++);
@@ -181,22 +182,55 @@ void QtPDDL2XML::ConnectShowDomainDataButtons()
 				if (QString::fromStdString(a.name) == choice)
 					WriteAction(out, a, 0);
 			}*/
-			WriteAction(out, readDomainFile.allAction[ui.domainActionBox->currentIndex() - 1], 0);
+			WriteAction(out, readDomainFile.allAction[ui.domainActionBox->currentIndex() - 1]
+				, 0,ui.domainActionConditionBox->currentText(), ui.domainActionEffectBox->currentText());
 		}
 		ui.domainTextBrowser->setText(out.readAll());
 	});
 
-	connect(ui.domainActionBox, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [&](const QString& cq) {
+	connect(ui.domainActionBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [&](int which) {
 		ui.domainActionConditionBox->clear();
 		ui.domainActionEffectBox->clear();
-		if (cq == "ALL")
+		bool isExist = false;
+		QStringList qsl;
+		if (which == 0)
 		{
 			ui.domainActionConditionBox->addItem("ALL");
 			ui.domainActionEffectBox->addItem("ALL");
+			return;
 		}
 		else
 		{
+			for (auto a : readDomainFile.allAction[which - 1].condition)
+			{
+				isExist = false;
+				for (auto s : qsl)
+					if (s.toStdString() == a.someName)
+					{
+						isExist = true;
+						break;
+					}
+				if (!isExist)
+					qsl.push_back(QString::fromStdString(a.someName));
+				else continue;
+			}
+			ui.domainActionConditionBox->addItems(qsl);
+			qsl.clear();
 
+			for (auto a : readDomainFile.allAction[which - 1].effect)
+			{
+				isExist = false;
+				for (auto s : qsl)
+					if (s.toStdString() == a.someName)
+					{
+						isExist = true;
+						break;
+					}
+				if (!isExist)
+					qsl.push_back(QString::fromStdString(a.someName));
+				else continue;
+			}
+			ui.domainActionEffectBox->addItems(qsl);
 		}
 	});
 }
@@ -375,7 +409,7 @@ void QtPDDL2XML::LoadProblem()
 	
 }
 
-void QtPDDL2XML::WriteAction(QTextStream &out, Action a, int numMain)
+void QtPDDL2XML::WriteAction(QTextStream &out, Action a, int numMain, const QString& condition, const QString& effect)
 {
 	//numMain是确定Action数目的，0就是一个，就不输出（1），如果是正整数，则是ALL模式，就依次输出
 	if (numMain != 0)
@@ -398,9 +432,20 @@ void QtPDDL2XML::WriteAction(QTextStream &out, Action a, int numMain)
 	
 
 	int num = 1;
+	bool isCertainOne;
 	for (auto m1 : a.condition)
 	{
-		out << "	Condition (" << num++ << ") name is : " << m1.someName.data() << endl;
+		if (condition == "ALL" || condition == "") isCertainOne = false;
+		else isCertainOne = true;
+
+		if (isCertainOne)
+		{
+			if (m1.someName != condition.toStdString()) continue;
+			out << "	Condition name is : " << m1.someName.data() << endl;
+		}
+		else 
+			out << "	Condition (" << num++ << ") name is : " << m1.someName.data() << endl;
+
 		out << "	Type is: ";
 		out << m1.mainType.data() << ", " << m1.keepingType.data();
 		if (m1.itselfType != "") out << ", " << m1.itselfType.data() << endl;
@@ -410,9 +455,19 @@ void QtPDDL2XML::WriteAction(QTextStream &out, Action a, int numMain)
 	}
 	num = 1;
 	out << endl;
+
 	for (auto m1 : a.effect)
 	{
-		out << "	Effect (" << num++ << ") name is : " << m1.someName.data() << endl;
+		if (effect == "ALL" || effect == "") isCertainOne = false;
+		else isCertainOne = true;
+
+		if (isCertainOne)
+		{
+			if (m1.someName != effect.toStdString()) continue;
+			out << "	Effect name is : " << m1.someName.data() << endl;
+		}
+		else
+			out << "	Effect (" << num++ << ") name is : " << m1.someName.data() << endl;
 		out << "	Type is: ";
 		out << m1.mainType.data() << ", " << m1.keepingType.data();
 		if (m1.itselfType != "") out << ", " << m1.itselfType.data() << endl;
@@ -424,7 +479,7 @@ void QtPDDL2XML::WriteAction(QTextStream &out, Action a, int numMain)
 
 }
 
-void QtPDDL2XML::WriteVariables(QTextStream &out, map<string, string> m, QString headTab, QString certain = "")
+void QtPDDL2XML::WriteVariables(QTextStream &out, map<string, string> m, QString headTab, QString certain)
 {
 	if (certain == "")
 	{
@@ -433,9 +488,7 @@ void QtPDDL2XML::WriteVariables(QTextStream &out, map<string, string> m, QString
 				out << headTab << QString::fromStdString(m1.second) << " " << QString::fromStdString(m1.first) << endl;
 			}
 	}
-	else
-	{
-		out << headTab << m[certain.toStdString()].data() << " " << certain << endl;
-	}
+	else out << headTab << m[certain.toStdString()].data() << " " << certain << endl;
+
 	
 }

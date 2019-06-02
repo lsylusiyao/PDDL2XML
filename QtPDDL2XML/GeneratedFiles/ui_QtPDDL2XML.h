@@ -56,7 +56,7 @@ public:
     QComboBox *domainActionBox;
     QPushButton *showDomainActionButton;
     QLabel *label_11;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QGridLayout *gridLayout_4;
     QLabel *label_12;
     QComboBox *domainActionConditionBox;
@@ -67,13 +67,13 @@ public:
     QTextBrowser *problemTextBrowser;
     QPushButton *startReadProblemButton;
     QPushButton *writeXMLButton_Problem;
-    QWidget *layoutWidget1;
+    QWidget *layoutWidget2;
     QGridLayout *gridLayout_3;
     QLabel *label_9;
     QLineEdit *problemLineEdit;
     QLabel *label_8;
     QLineEdit *domainLineEdit_problem;
-    QWidget *layoutWidget2;
+    QWidget *layoutWidget3;
     QGridLayout *gridLayout_2;
     QLabel *label_5;
     QComboBox *problemObjectsBox;
@@ -95,7 +95,7 @@ public:
     {
         if (QtPDDL2XMLClass->objectName().isEmpty())
             QtPDDL2XMLClass->setObjectName(QString::fromUtf8("QtPDDL2XMLClass"));
-        QtPDDL2XMLClass->resize(1024, 600);
+        QtPDDL2XMLClass->resize(1024, 700);
         centralWidget = new QWidget(QtPDDL2XMLClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -107,13 +107,15 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1004, 526));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1004, 626));
+        scrollAreaWidgetContents->setMinimumSize(QSize(1000, 618));
         horizontalLayout_2 = new QHBoxLayout(scrollAreaWidgetContents);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         stackedWidget = new QStackedWidget(scrollAreaWidgetContents);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
+        stackedWidget->setMinimumSize(QSize(986, 608));
         page = new QWidget();
         page->setObjectName(QString::fromUtf8("page"));
         switch2ProblemButton = new QPushButton(page);
@@ -132,7 +134,7 @@ public:
         startReadDomainButton->setFont(font1);
         domainTextBrowser = new QTextBrowser(page);
         domainTextBrowser->setObjectName(QString::fromUtf8("domainTextBrowser"));
-        domainTextBrowser->setGeometry(QRect(485, 60, 491, 441));
+        domainTextBrowser->setGeometry(QRect(485, 60, 491, 551));
         domainTextBrowser->setFont(font1);
         label_4 = new QLabel(page);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -149,7 +151,7 @@ public:
         domainLineEdit->setFont(font);
         writeXMLButton = new QPushButton(page);
         writeXMLButton->setObjectName(QString::fromUtf8("writeXMLButton"));
-        writeXMLButton->setGeometry(QRect(370, 340, 111, 31));
+        writeXMLButton->setGeometry(QRect(10, 40, 111, 31));
         writeXMLButton->setFont(font);
         layoutWidget = new QWidget(page);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
@@ -231,15 +233,15 @@ public:
         sizePolicy.setHeightForWidth(label_11->sizePolicy().hasHeightForWidth());
         label_11->setSizePolicy(sizePolicy);
         label_11->setFont(font1);
-        widget = new QWidget(page);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(90, 310, 271, 81));
-        gridLayout_4 = new QGridLayout(widget);
+        layoutWidget1 = new QWidget(page);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(90, 310, 271, 81));
+        gridLayout_4 = new QGridLayout(layoutWidget1);
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         gridLayout_4->setContentsMargins(0, 0, 0, 0);
-        label_12 = new QLabel(widget);
+        label_12 = new QLabel(layoutWidget1);
         label_12->setObjectName(QString::fromUtf8("label_12"));
         sizePolicy.setHeightForWidth(label_12->sizePolicy().hasHeightForWidth());
         label_12->setSizePolicy(sizePolicy);
@@ -247,13 +249,13 @@ public:
 
         gridLayout_4->addWidget(label_12, 0, 0, 1, 1);
 
-        domainActionConditionBox = new QComboBox(widget);
+        domainActionConditionBox = new QComboBox(layoutWidget1);
         domainActionConditionBox->setObjectName(QString::fromUtf8("domainActionConditionBox"));
         domainActionConditionBox->setFont(font1);
 
         gridLayout_4->addWidget(domainActionConditionBox, 0, 1, 1, 1);
 
-        label_13 = new QLabel(widget);
+        label_13 = new QLabel(layoutWidget1);
         label_13->setObjectName(QString::fromUtf8("label_13"));
         sizePolicy.setHeightForWidth(label_13->sizePolicy().hasHeightForWidth());
         label_13->setSizePolicy(sizePolicy);
@@ -261,7 +263,7 @@ public:
 
         gridLayout_4->addWidget(label_13, 1, 0, 1, 1);
 
-        domainActionEffectBox = new QComboBox(widget);
+        domainActionEffectBox = new QComboBox(layoutWidget1);
         domainActionEffectBox->setObjectName(QString::fromUtf8("domainActionEffectBox"));
         domainActionEffectBox->setFont(font1);
 
@@ -278,7 +280,7 @@ public:
         switch2DomainButton->setFont(font);
         problemTextBrowser = new QTextBrowser(page_2);
         problemTextBrowser->setObjectName(QString::fromUtf8("problemTextBrowser"));
-        problemTextBrowser->setGeometry(QRect(455, 80, 511, 421));
+        problemTextBrowser->setGeometry(QRect(460, 80, 511, 521));
         problemTextBrowser->setFont(font1);
         startReadProblemButton = new QPushButton(page_2);
         startReadProblemButton->setObjectName(QString::fromUtf8("startReadProblemButton"));
@@ -286,17 +288,17 @@ public:
         startReadProblemButton->setFont(font1);
         writeXMLButton_Problem = new QPushButton(page_2);
         writeXMLButton_Problem->setObjectName(QString::fromUtf8("writeXMLButton_Problem"));
-        writeXMLButton_Problem->setGeometry(QRect(330, 360, 111, 31));
+        writeXMLButton_Problem->setGeometry(QRect(10, 40, 111, 31));
         writeXMLButton_Problem->setFont(font);
-        layoutWidget1 = new QWidget(page_2);
-        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(630, 0, 241, 71));
-        gridLayout_3 = new QGridLayout(layoutWidget1);
+        layoutWidget2 = new QWidget(page_2);
+        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(630, 0, 241, 71));
+        gridLayout_3 = new QGridLayout(layoutWidget2);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_3->setContentsMargins(0, 0, 0, 0);
-        label_9 = new QLabel(layoutWidget1);
+        label_9 = new QLabel(layoutWidget2);
         label_9->setObjectName(QString::fromUtf8("label_9"));
         sizePolicy.setHeightForWidth(label_9->sizePolicy().hasHeightForWidth());
         label_9->setSizePolicy(sizePolicy);
@@ -304,13 +306,13 @@ public:
 
         gridLayout_3->addWidget(label_9, 0, 0, 1, 1);
 
-        problemLineEdit = new QLineEdit(layoutWidget1);
+        problemLineEdit = new QLineEdit(layoutWidget2);
         problemLineEdit->setObjectName(QString::fromUtf8("problemLineEdit"));
         problemLineEdit->setFont(font);
 
         gridLayout_3->addWidget(problemLineEdit, 0, 1, 1, 1);
 
-        label_8 = new QLabel(layoutWidget1);
+        label_8 = new QLabel(layoutWidget2);
         label_8->setObjectName(QString::fromUtf8("label_8"));
         sizePolicy.setHeightForWidth(label_8->sizePolicy().hasHeightForWidth());
         label_8->setSizePolicy(sizePolicy);
@@ -318,21 +320,21 @@ public:
 
         gridLayout_3->addWidget(label_8, 1, 0, 1, 1);
 
-        domainLineEdit_problem = new QLineEdit(layoutWidget1);
+        domainLineEdit_problem = new QLineEdit(layoutWidget2);
         domainLineEdit_problem->setObjectName(QString::fromUtf8("domainLineEdit_problem"));
         domainLineEdit_problem->setFont(font);
 
         gridLayout_3->addWidget(domainLineEdit_problem, 1, 1, 1, 1);
 
-        layoutWidget2 = new QWidget(page_2);
-        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(100, 140, 341, 191));
-        gridLayout_2 = new QGridLayout(layoutWidget2);
+        layoutWidget3 = new QWidget(page_2);
+        layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
+        layoutWidget3->setGeometry(QRect(100, 140, 341, 191));
+        gridLayout_2 = new QGridLayout(layoutWidget3);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_5 = new QLabel(layoutWidget2);
+        label_5 = new QLabel(layoutWidget3);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
         label_5->setSizePolicy(sizePolicy);
@@ -340,20 +342,20 @@ public:
 
         gridLayout_2->addWidget(label_5, 0, 0, 1, 1);
 
-        problemObjectsBox = new QComboBox(layoutWidget2);
+        problemObjectsBox = new QComboBox(layoutWidget3);
         problemObjectsBox->setObjectName(QString::fromUtf8("problemObjectsBox"));
         problemObjectsBox->setMinimumSize(QSize(0, 25));
         problemObjectsBox->setFont(font1);
 
         gridLayout_2->addWidget(problemObjectsBox, 0, 1, 1, 1);
 
-        showProblemObjectsButton = new QPushButton(layoutWidget2);
+        showProblemObjectsButton = new QPushButton(layoutWidget3);
         showProblemObjectsButton->setObjectName(QString::fromUtf8("showProblemObjectsButton"));
         showProblemObjectsButton->setFont(font1);
 
         gridLayout_2->addWidget(showProblemObjectsButton, 0, 2, 1, 1);
 
-        label_6 = new QLabel(layoutWidget2);
+        label_6 = new QLabel(layoutWidget3);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
         label_6->setSizePolicy(sizePolicy);
@@ -361,20 +363,20 @@ public:
 
         gridLayout_2->addWidget(label_6, 1, 0, 1, 1);
 
-        problemInitBox = new QComboBox(layoutWidget2);
+        problemInitBox = new QComboBox(layoutWidget3);
         problemInitBox->setObjectName(QString::fromUtf8("problemInitBox"));
         problemInitBox->setMinimumSize(QSize(0, 25));
         problemInitBox->setFont(font1);
 
         gridLayout_2->addWidget(problemInitBox, 1, 1, 1, 1);
 
-        showProblemInitButton = new QPushButton(layoutWidget2);
+        showProblemInitButton = new QPushButton(layoutWidget3);
         showProblemInitButton->setObjectName(QString::fromUtf8("showProblemInitButton"));
         showProblemInitButton->setFont(font1);
 
         gridLayout_2->addWidget(showProblemInitButton, 1, 2, 1, 1);
 
-        label_7 = new QLabel(layoutWidget2);
+        label_7 = new QLabel(layoutWidget3);
         label_7->setObjectName(QString::fromUtf8("label_7"));
         sizePolicy.setHeightForWidth(label_7->sizePolicy().hasHeightForWidth());
         label_7->setSizePolicy(sizePolicy);
@@ -382,20 +384,20 @@ public:
 
         gridLayout_2->addWidget(label_7, 2, 0, 1, 1);
 
-        problemGoalBox = new QComboBox(layoutWidget2);
+        problemGoalBox = new QComboBox(layoutWidget3);
         problemGoalBox->setObjectName(QString::fromUtf8("problemGoalBox"));
         problemGoalBox->setMinimumSize(QSize(0, 25));
         problemGoalBox->setFont(font1);
 
         gridLayout_2->addWidget(problemGoalBox, 2, 1, 1, 1);
 
-        showProblemGoalButton = new QPushButton(layoutWidget2);
+        showProblemGoalButton = new QPushButton(layoutWidget3);
         showProblemGoalButton->setObjectName(QString::fromUtf8("showProblemGoalButton"));
         showProblemGoalButton->setFont(font1);
 
         gridLayout_2->addWidget(showProblemGoalButton, 2, 2, 1, 1);
 
-        label_10 = new QLabel(layoutWidget2);
+        label_10 = new QLabel(layoutWidget3);
         label_10->setObjectName(QString::fromUtf8("label_10"));
         sizePolicy.setHeightForWidth(label_10->sizePolicy().hasHeightForWidth());
         label_10->setSizePolicy(sizePolicy);
@@ -403,14 +405,14 @@ public:
 
         gridLayout_2->addWidget(label_10, 3, 0, 1, 1);
 
-        problemMetricBox = new QComboBox(layoutWidget2);
+        problemMetricBox = new QComboBox(layoutWidget3);
         problemMetricBox->setObjectName(QString::fromUtf8("problemMetricBox"));
         problemMetricBox->setMinimumSize(QSize(0, 25));
         problemMetricBox->setFont(font1);
 
         gridLayout_2->addWidget(problemMetricBox, 3, 1, 1, 1);
 
-        showProblemMetricButton = new QPushButton(layoutWidget2);
+        showProblemMetricButton = new QPushButton(layoutWidget3);
         showProblemMetricButton->setObjectName(QString::fromUtf8("showProblemMetricButton"));
         showProblemMetricButton->setFont(font1);
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>600</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,12 +26,24 @@
          <x>0</x>
          <y>0</y>
          <width>1004</width>
-         <height>526</height>
+         <height>626</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>1000</width>
+         <height>618</height>
+        </size>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QStackedWidget" name="stackedWidget">
+          <property name="minimumSize">
+           <size>
+            <width>986</width>
+            <height>608</height>
+           </size>
+          </property>
           <property name="currentIndex">
            <number>0</number>
           </property>
@@ -80,7 +92,7 @@
               <x>485</x>
               <y>60</y>
               <width>491</width>
-              <height>441</height>
+              <height>551</height>
              </rect>
             </property>
             <property name="font">
@@ -134,8 +146,8 @@
            <widget class="QPushButton" name="writeXMLButton">
             <property name="geometry">
              <rect>
-              <x>370</x>
-              <y>340</y>
+              <x>10</x>
+              <y>40</y>
               <width>111</width>
               <height>31</height>
              </rect>
@@ -331,7 +343,7 @@
              <string>For Action</string>
             </property>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>90</x>
@@ -425,10 +437,10 @@
            <widget class="QTextBrowser" name="problemTextBrowser">
             <property name="geometry">
              <rect>
-              <x>455</x>
+              <x>460</x>
               <y>80</y>
               <width>511</width>
-              <height>421</height>
+              <height>521</height>
              </rect>
             </property>
             <property name="font">
@@ -460,8 +472,8 @@
            <widget class="QPushButton" name="writeXMLButton_Problem">
             <property name="geometry">
              <rect>
-              <x>330</x>
-              <y>360</y>
+              <x>10</x>
+              <y>40</y>
               <width>111</width>
               <height>31</height>
              </rect>
